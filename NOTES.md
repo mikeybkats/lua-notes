@@ -23,6 +23,7 @@
 pi = 3.14
 message = "The rounded value of pi is: " .. pi
 print(message)
+-- output: "The rounded value of pi is 3.14"
 ```
 
 ### Console interactions
@@ -173,3 +174,85 @@ end
 ### Arrays are one based
 
 When indexing through arrays they start at 1 (not 0 like C or Javascript).
+
+Values can explicitly be placed at 0 if the dev wants to:
+
+```lua
+myArr = { "horses", "eat", "hay"}
+
+print(myArr[1])
+-- output: "horses"
+
+print(myArr[0]);
+-- output: nil
+
+myArr[0] = "boom"
+print(myArr[0])
+-- output: boom
+```
+
+### Iterating through tables and arrays
+
+```lua
+days = { "monday", "tuesday", "wednesday" }
+
+for i,v in pairs(days) do
+    print(v)
+end
+```
+
+**Pairs** keyword is an iterator function provided by lua used for iterating through tables
+
+**ipairs** keyword is an iterator function provided by lua used for iterating through arrays
+
+### pairs function
+
+```lua
+-- pairs lets you iterate over objects
+-- it works much like an object map in javascript here
+-- key order is unspecified in the lua pairs function
+vector = { x = 34, y = 22, z = 56 }
+
+for key, value in pairs(vector) do
+  print ("key: " .. key .. ", value: " .. value)
+end
+```
+
+### ipairs function
+
+```lua
+-- ipairs iterates over arrays
+-- it works just like a regular map in javascript
+days = { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" }
+
+for i, v in ipairs(days) do
+  print ("index: " .. i .. ", value: " .. v)
+end
+```
+
+_ipairs and pairs are explaned in depth [here](https://www.lua.org/pil/7.3.html)._
+
+### Closures
+
+If a function returns an anonymous function you can call the result of the function. It's like a double function call. And the state of the origin function is remembered by the returned anonymous function:
+
+```lua
+function FooCount()
+    local count = 0
+    return function()
+        return count + 1
+    end
+end
+
+foo = FooCount()
+
+one = foo()
+-- returns 1
+
+two = foo()
+-- returns 2
+
+three = foo()
+-- returns 3
+
+```
