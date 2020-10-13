@@ -191,6 +191,8 @@ print(myArr[0])
 -- output: boom
 ```
 
+## Chapter 3
+
 ### Iterating through tables and arrays
 
 ```lua
@@ -255,4 +257,30 @@ two = foo()
 three = foo()
 -- returns 3
 
+```
+
+### custom iterators
+
+A generic for loop holds on to three variables:
+
+The iterator function, this is your closure
+An invariant state
+A control variable, the first variable returned by the iterator function
+
+```lua
+days = { "monday", "tuesday", "wednesday", "thursday" }
+
+function walk(array)
+  local index = 0
+
+  return function()
+    index = index + 1
+
+    return array[index]
+  end
+end
+
+for day in walk(days) do
+  print (day)
+end
 ```
